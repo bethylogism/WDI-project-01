@@ -1,2 +1,2 @@
-h1{color:#f05}
+*{box-sizing:border-box}h1{color:#0C51BE;text-align:center}main{max-width:400px;height:800px;margin:auto;background:#EDCF2E;padding:20px}.flex{display:flex;flex-wrap:wrap}.ball{height:40px;width:40px;border:1px solid grey;transition:all 0.4s;border-radius:100%;margin:2px}section{justify-content:center;padding:10px;border:4px solid #0C51BE;margin:20px}section.codeMaster{background:black}section.codeBreaker{background:white}section.codeBreaker .computerSays{width:13%;background:#64B9EE;margin-right:10px}p{text-align:center}
 /*# sourceMappingURL=style.css.map */

@@ -1,5 +1,57 @@
-$color: #f05;
+$theblue: #0C51BE;
+$electricblue: #64B9EE;
+$theyellow: #EDCF2E;
+$theorange: #EFB93D;
+
+* {
+  box-sizing: border-box;
+}
 
 h1 {
-  color: $color;
+  color: $theblue;
+  text-align: center;
+}
+
+main {
+  max-width: 400px;
+  height: 800px;
+  margin: auto;
+  background: $theyellow;
+  padding: 20px;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ball {
+  height: 40px;
+  width: 40px;
+  border: 1px solid grey;
+  transition:all 0.4s;
+  border-radius: 100%;
+  margin: 2px;
+}
+
+section {
+  justify-content: center;
+  padding: 10px;
+  border: 4px solid $theblue;
+  margin: 20px;
+  &.codeMaster {
+    background: black;
+  }
+  &.codeBreaker {
+    background: white;
+    .computerSays {
+      width: 13%;
+      background: $electricblue;
+      margin-right: 10px;
+    }
+  }
+}
+
+p {
+  text-align: center;
 }
