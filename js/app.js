@@ -58,27 +58,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function attempt() {
     console.log('breaker code is ' + breakerCode)
-    let clueArray = []
+    const clueArray = []
+    const usedIndexes = []
+    let black = 0
+    let orange = 0
+    let red = 0
     breakerCode.forEach((e1,ind1) => {
-      let comparison = []
+      const comparison = []
       masterCode.forEach((e2,ind2) => {
-      //if the element is identical add a green pin
+      //if the element is identical add a red pin
         if (e1 === e2 && ind1 === ind2) {
-          console.log(e1 + '===' + e2)
-          comparison.push(e1 + ' vs ' + e2 + ': ' + 'green')
-          return 
-        //if the element is not identical but is in the array add orange pin
-        } else if (masterCode.includes(e1) && ind1 !== ind2) {
-          console.log('Alrighty, call codeOrange')
+          // console.log(e1 + '===' + e2 )
+          comparison.push(`[${ind1}] is same as [${ind2}]: red`)
+          // usedIndexes.push(ind1)
+          red ++
+          console.log(`red is now ${red}`)
+        //if the element is  already RED but is the same as the above index then add an orange pin
+        } else if (masterCode.includes(e1) && ind1 === ind2) {
+          console.log(`Orange because breakercode[${ind1}] === masterCode[${ind2}]`)
           comparison.push(e1 + ' vs ' + e2 + ': ' + 'orange')
-        //otherwise do nothing / break / return?
-        } else {
-          comparison.push(e1 + ' vs ' + e2 + ': ' + 'red')
-          console.log('Oh doeeee, codeRed!')
+          orange++
+        //if not in there at all (four times) then add one to black/empty
+        } else if (!masterCode.includes(e1)){
+          black+=0.25
+          comparison.push(e1 + ' vs ' + e2 + ': ' + 'proper black - none match')
+          console.log(`black is now ${black}`)
+        // }else{
+        //   comparison.push(e1 + ' vs ' + e2 + ': ' + 'neutral')
+        //   console.log('Neutral')
         }
       })
-      console.log('Adding comparion: ' + comparison)
+      console.log(`black plus red is ${black} + ${red} = ${black + red} plus orange is ${black + red} + ${orange} = ${black + red + orange}`)
+      console.log('Adding comparison '+ comparison)
       clueArray.push(comparison)
+      console.log(comparison)
     })
     console.log(clueArray)
     computerSays(clues)
