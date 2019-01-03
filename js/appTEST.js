@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const masterBalls = Array.prototype.slice.call(document.querySelectorAll('.master'))
   const breakerBalls = document.querySelectorAll('.breaker')
   const attemptBtns = document.querySelectorAll('.attempt')
-  // const clues = document.querySelectorAll('.clues')
+  const clues = document.querySelectorAll('.clues')
   const colours = ['blue', 'red', 'green', 'purple', 'pink', 'white']
   let masterCode = []
   let breakerCode = []
-
+  let clueArray = []
 
   //**FUNCTIONS**
 
@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   createOptions(optionBalls)
 
-  //CREATE THE SECRET MASTER CODE COLOURS
   function colourCode(masterBalls) {
     masterBalls.forEach((ball, i) => {
       ball.style.backgroundColor = masterCode[i]
@@ -60,69 +59,77 @@ document.addEventListener('DOMContentLoaded', () => {
   //if (breakerCode[i].index === masterCode[i].index) return codeGreen()
   //if masterCode contains breakerCode.value then return codeOrange()
 
+
+
   function attempt() {
-    const cluesNr = this.id
-    //compare the master code with the last four given code breaker items
+    console.log("This is:")
+    console.log(this)
+    console.log(this.id)
+    console.log('breaker code is ' + breakerCode)
+
+    // const usedIndexes = []
+    let black = 0
+    let red = 0
+    let white = 4
+
+
     let currCode = breakerCode.slice(breakerCode.length-4)
     console.log('current code is ' + currCode)
-    console.log('masterCode is ' + masterCode)
-    let redNum = 0
-    let usedMaster = []
-    let usedBreaker = []
     currCode.forEach((e1,ind1) => {
+
       masterCode.forEach((e2,ind2) => {
       //if the element is identical add a red pin
         if (e1 === e2 && ind1 === ind2) {
-          redNum ++
-          //add element indices to used arrays
-          usedBreaker.push(ind1)
-          usedMaster.push(ind2)
+          // console.log(e1 + '===' + e2 )
+          // comparison.push(`[${ind1}] is same as [${ind2}]: red`)
+          // usedIndexes.push(ind1)
+          red ++
+          console.log(`now ${red} red pins`)
+          clueArray.push('red')
+          //remove the breakerCode element?
+        //if the element is  already RED but is the same as the above index then remove a white pin)
+        } else if (masterCode.includes(e1) && ind1 === ind2) {
+          console.log(`remove a white pin because included breakercode[${ind1}] === masterCode[${ind2}]`)
+          // comparison.push(e1 + ' vs ' + e2 + ': ' + 'negative white')
+          white--
+        //if not in there at all (four times) then add one to black/empty
+        } else if (!masterCode.includes(e1)){
+          black+=0.25
+          // comparison.push(e1 + ' vs ' + e2 + ': ' + 'proper black - none match')
+          console.log(`Now ${black} black pins`)
+          clueArray.push('black')
+        // }else{
+        //   comparison.push(e1 + ' vs ' + e2 + ': ' + 'neutral')
+        //   console.log('Neutral')
         }
       })
+      console.log(`{total black pins: ${black}, total red pins: ${red}, total white pins: ${white}}`)
+      console.log('clue Array is ' + clueArray)
+
     })
-    redPin(cluesNr, redNum)
-    if (redNum === 4)
-      window.alert('Huzzah, you win!')
-      //Repeat checks for adding white pins
-    let whiteNum = 0
-    currCode.forEach((e1,ind1) => {
-      masterCode.forEach((e2,ind2) => {
-      //
-        if (e1 === e2 && ind1 !== ind2 && !usedBreaker.includes(ind1) && !usedMaster.includes(ind2)) {
-          whiteNum ++
-          //add element indices to used arrays
-          usedBreaker.push(ind1)
-          usedMaster.push(ind2)
-          console.log(`nr of white pins: ${whiteNum}`)
-        }
-      })
-    })
-    whitePin(cluesNr, whiteNum, redNum)
+    // console.log(clueArray)
+    // computerSays(clues, clueArray)
   }
 
-  //Add a red pin for each redNum
-  function redPin(cluesNr, redNum) {
-    let clues = document.querySelectorAll(`.clues[data-key="${cluesNr}"]`)
-    clues.forEach((clue,ind) => {
-      if (ind<redNum)
-        clue.style.backgroundColor = 'red' //should do this once each time
-    })
-  }
+  // function computerSays(clues) {
+  //   clues.forEach((clue, i) => {
+  //     clues.style.backgroundColor = clueArray[i]
+  //   })
+  // }
 
-  //Add a white pin for each whiteNum
-  function whitePin(cluesNr, whiteNum, redNum) {
-    let clues = document.querySelectorAll(`.clues[data-key="${cluesNr}"]`)
-    clues.forEach((clue,ind) => {
-      if (ind>=redNum && ind<(redNum + whiteNum))
-        clue.style.backgroundColor = 'white' //should do this once each time
-    })
-  }
+
+  // function codeOrange() {
+  //   computerSays.style.backgroundColor = 'orange'
+  //   instructions.textContent = 'Incorrect position, but correct colour'
+  //   //push an orrange dot somewhere
+  // }
 
 
   function startGame() {
     createCode()
   }
   startGame()
+
 
 
 

@@ -2,6 +2,8 @@ $theblue: #0C51BE;
 $electricblue: #64B9EE;
 $theyellow: #EDCF2E;
 $theorange: #EFB93D;
+$lightborder: 3px double $theyellow;
+$darkborder: 3px double black;
 
 * {
   box-sizing: border-box;
@@ -13,10 +15,10 @@ h1 {
 }
 
 main {
-  max-width: 400px;
-  height: 800px;
+  max-width: 380px;
+  height: 100vh;
   margin: auto;
-  background: $theyellow;
+  border: $darkborder;
   padding: 20px;
 }
 
@@ -26,9 +28,9 @@ main {
 }
 
 .ball {
-  height: 40px;
-  width: 40px;
-  border: 1px solid grey;
+  height: 25px;
+  width: 25px;
+  border: $darkborder;
   transition:all 0.4s;
   border-radius: 100%;
   margin: 2px;
@@ -36,22 +38,40 @@ main {
 
 section {
   justify-content: center;
-  padding: 10px;
-  border: 4px solid $theblue;
-  margin: 20px;
+  padding: 3px 10px;
+  border: $lightborder;
+  margin: 1px;
   &.codeMaster {
     background: black;
   }
   &.codeBreaker {
     background: white;
+    button {
+      margin: auto;
+    }
     .computerSays {
-      width: 13%;
-      background: $electricblue;
-      margin-right: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      width: 30px;
+      height: 30px;
+      border: $darkborder;
+      margin: auto;
+      .clues {
+        background-color: black;
+        border: 1px solid black;
+        height: 50%;
+        width: 50%;
+        border-radius: 100%;
+      }
     }
   }
 }
 
 p {
   text-align: center;
+}
+
+.reset {
+  width: 50%;
+  margin: 0 auto;
 }
