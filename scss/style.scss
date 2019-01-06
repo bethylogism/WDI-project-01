@@ -100,3 +100,31 @@ p {
   width: 50%;
   //move this into the section above and flex-wrap and flex-grow 1;
 }
+
+
+.body2 {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin: 0;
+}
+
+.grid {
+  align-items: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  max-height: 600px;
+  max-width: 400px;
+}
+
+.grid div {
+  flex-grow: 1;
+  height: 10%;
+  width: 10%;
+  border: 1px solid black;
+}
