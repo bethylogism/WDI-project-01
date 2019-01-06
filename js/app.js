@@ -10,8 +10,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const colours = ['blue', 'red', 'green', 'purple', 'pink', 'white']
   let masterCode = []
   let breakerCode = []
+  const height = 10
+  const width = 6
+
 
   //**FUNCTIONS**
+
+  //CREATE THE GRID FOR THE USER CODE BREAKING ATTEMPTS && COMPUTER RESPONSES
+  const grid = document.querySelector('.grid')
+  console.log(grid)
+
+  for(let i = 0; i<width*height; i++) {
+    grid.innerHTML+='<div></div>'
+  }
+
 
   //CREATE COLOURED OPTION BALLS
   function createOptions(optionBalls) {
