@@ -7,19 +7,25 @@ $darkborder: 3px double black;
 
 * {
   box-sizing: border-box;
+  font-family: "Poiret One", sans-serif;
 }
 
 h1 {
-  color: $theblue;
+  color: black;
   text-align: center;
 }
 
 main {
   max-width: 380px;
-  height: 100vh;
+  height: 85vh;
   margin: auto;
   border: $darkborder;
   padding: 20px;
+}
+
+button {
+  // text-transform: uppercase;
+  font-weight: 800;
 }
 
 .flex {
@@ -34,15 +40,24 @@ main {
   transition:all 0.4s;
   border-radius: 100%;
   margin: 2px;
+  transition: all .5s;
 }
 
 section {
   justify-content: center;
   padding: 3px 10px;
-  border: $lightborder;
+  // border: $lightborder;
   margin: 1px;
   &.codeMaster {
     background: black;
+    background-image: url('./assets/questions.png');
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+      & .master {
+      opacity: 0.4;
+    }
   }
   &.codeBreaker {
     background: white;
@@ -62,9 +77,19 @@ section {
         height: 50%;
         width: 50%;
         border-radius: 100%;
+        transition: all .5s;
       }
     }
   }
+}
+
+
+.vanish {
+   display: none;
+}
+// OR
+.visible {
+  opacity: 100%;
 }
 
 p {
@@ -73,5 +98,5 @@ p {
 
 .reset {
   width: 50%;
-  margin: 0 auto;
+  //move this into the section above and flex-wrap and flex-grow 1;
 }

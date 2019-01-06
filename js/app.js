@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let masterCode = []
   let breakerCode = []
 
-
   //**FUNCTIONS**
 
   //CREATE COLOURED OPTION BALLS
