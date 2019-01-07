@@ -6,13 +6,18 @@ $darkborder: 3px double black;
   text-transform: uppercase;
 }
 
-main {
+main, .welcome {
   max-width: 380px;
   height: 88vh;
   margin: auto;
   // border: $darkborder;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.7);
   padding: 20px;
+}
+
+
+.vanish {
+   display: none;
 }
 
 
@@ -26,8 +31,6 @@ main {
 
 .grid {
   align-items: center;
-  // box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-  border: $darkborder;
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
@@ -107,9 +110,6 @@ section {
 }
 
 
-// .vanish {
-//    display: none;
-// }
 
 .invisible {
   opacity: 0.4;

@@ -8,11 +8,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // const breakerBalls = document.querySelectorAll('.breaker')
 
   // const clues = document.querySelectorAll('.clues')
-  const colours = ['blue', 'red', 'green', 'purple', 'pink', 'white']
+  const colours = ['blue', 'red', 'orange', 'purple', 'pink', 'yellow']
   let masterCode = []
   let breakerCode = []
   const attempts = 10
   const resetBtn = document.querySelector('.reset')
+  const playBtn = document.querySelector('.play')
+  const game = document.querySelector('main')
+  const welcomeScreen = document.querySelector('.welcome')
+
+  function vanish() {
+    welcomeScreen.classList.add('vanish')
+    game.classList.remove('vanish')
+    console.log(game, welcomeScreen)
+  }
+
+  playBtn.addEventListener('click', startGame)
 
 
   //**FUNCTIONS**
@@ -88,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   const attemptBtns = document.querySelectorAll('.attempt')
-  console.log(attemptBtns)
   //USER ATTEMPT: COMPARE THE ARRAYS (WITH NEW ID NUMBER)
   function attempt() {
     const cluesId = this.id
@@ -174,16 +184,15 @@ document.addEventListener('DOMContentLoaded', () => {
     createGrid()
     createCode()
     createOptions(optionBalls)
+    vanish()
   }
-  startGame()
+
 
   function reset() {
     console.log('RESET BUTTON CLICKED')
     masterCode = []
     breakerCode = []
-    createGrid()
-    createCode()
-    createOptions(optionBalls)
+    startGame()
   }
 
 
@@ -191,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //**EVENT LISTENERS**
   optionBalls.forEach(ball => ball.addEventListener('click', ballSelect))
-
   resetBtn.addEventListener('click', reset)
 
 
