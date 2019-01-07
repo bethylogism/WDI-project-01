@@ -79,7 +79,7 @@ section {
     background-repeat: no-repeat;
     background-size: 40%;
       & .master {
-      opacity: 0.9;
+      // opacity: 0.9;
     }
   }
   &.codeBreaker {
@@ -107,12 +107,12 @@ section {
 }
 
 
-.vanish {
-   display: none;
-}
-// OR
-.visible {
-  opacity: 100%;
+// .vanish {
+//    display: none;
+// }
+
+.invisible {
+  opacity: 0.9;
 }
 
 p {

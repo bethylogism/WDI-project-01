@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const attemptBtns = document.querySelectorAll('.attempt')
 
   function attempt() {
-    const cluesNr = this.id
+    const cluesId = this.id
     //compare the master code with the last four given code breaker items
     const currCode = breakerCode.slice(breakerCode.length-4)
     console.log('current code is ' + currCode)
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const usedBreaker = []
     currCode.forEach((e1,ind1) => {
       masterCode.forEach((e2,ind2) => {
-      //if the element is identical add a red pin
+      //if the element is identical add a RED pin
         if (e1 === e2 && ind1 === ind2) {
           redNum ++
           //add element indices to used arrays
@@ -100,10 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       })
     })
-    redPin(cluesNr, redNum)
+    pin(cluesId, 'red', redNum)
+    console.log(`nr of red pins: ${redNum}`)
+    //WIN CONDITION <-- extract this from the function
     if (redNum === 4)
       window.alert('Huzzah, you win!')
-      //Repeat checks for adding white pins
+    //Repeat checks for adding white pins
     let whiteNum = 0
     currCode.forEach((e1,ind1) => {
       masterCode.forEach((e2,ind2) => {
@@ -117,12 +119,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       })
     })
-    whitePin(cluesNr, whiteNum, redNum)
+    pin(cluesId, 'white', redNum, whiteNum)
   }
 
-  //Add a red pin for each redNum
-  function redPin(cluesNr, redNum) {
-    let clues = document.querySelectorAll(`.clues[data-key="${cluesNr}"]`)
+  //Add a red/white pin for each
+  function pin(cluesId, colour, redNum = 0, whiteNum = 0) {
+    let clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
+    clues.forEach((clue,ind) => {
+      if (ind<redNum)
+        clue.style.backgroundColor = 'red'
+      if (ind>=redNum && ind<(redNum + whiteNum))
+        clue.style.backgroundColor = `${colour}` //should do this once each time
+    })
+  }
+
+  function redPin(cluesId, redNum) {
+    let clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
     clues.forEach((clue,ind) => {
       if (ind<redNum)
         clue.style.backgroundColor = 'red' //should do this once each time
@@ -130,13 +142,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   //Add a white pin for each whiteNum
-  function whitePin(cluesNr, whiteNum, redNum) {
-    let clues = document.querySelectorAll(`.clues[data-key="${cluesNr}"]`)
+  function whitePin(cluesId, whiteNum, redNum) {
+    let clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
     clues.forEach((clue,ind) => {
       if (ind>=redNum && ind<(redNum + whiteNum))
         clue.style.backgroundColor = 'white' //should do this once each time
     })
   }
+  //**WIN CONDITION**
+
+  // masterBalls.classList.remove('invisible')
 
 
   function startGame() {
