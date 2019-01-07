@@ -112,7 +112,7 @@ section {
 // }
 
 .invisible {
-  opacity: 0.9;
+  opacity: 0.4;
 }
 
 p {
@@ -121,6 +121,7 @@ p {
 
 .reset {
   width: 50%;
+  margin: 10px;
   //move this into the section above and flex-wrap and flex-grow 1;
 }
 

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //**VARIABLES**
   const instructions = document.querySelector('p')
   const optionBalls = document.querySelectorAll('.option')
+  //Grab masterBalls as an array not a nodeList:
   const masterBalls = Array.prototype.slice.call(document.querySelectorAll('.master'))
   // const breakerBalls = document.querySelectorAll('.breaker')
 
@@ -42,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ball.style.backgroundColor = colours[i]
     })
   }
-  createOptions(optionBalls)
+  createOptions(optionBalls) //<== put this in init() && reset()
+
 
   //CREATE THE SECRET MASTER CODE COLOURS
   function colourCode(masterBalls) {
@@ -50,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ball.style.backgroundColor = masterCode[i]
     })
   }
-  //CREATE NEW RANDOM MASTER CODE
+  //CREATE NEW RANDOM MASTER CODE <== put this in init() && reset()
   function createCode() {
     //masterCode = Array()
     //while (masterCode.length < masterBalls.length)
@@ -102,9 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     pin(cluesId, 'red', redNum)
     console.log(`nr of red pins: ${redNum}`)
-    //WIN CONDITION <-- extract this from the function
-    if (redNum === 4)
-      window.alert('Huzzah, you win!')
     //Repeat checks for adding white pins
     let whiteNum = 0
     currCode.forEach((e1,ind1) => {
@@ -120,9 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     })
     pin(cluesId, 'white', redNum, whiteNum)
+    checkWin(redNum)
   }
 
-  //Add a red/white pin for each
+  //Add red and/or white pins
   function pin(cluesId, colour, redNum = 0, whiteNum = 0) {
     let clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
     clues.forEach((clue,ind) => {
@@ -133,25 +133,33 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  function redPin(cluesId, redNum) {
-    let clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
-    clues.forEach((clue,ind) => {
-      if (ind<redNum)
-        clue.style.backgroundColor = 'red' //should do this once each time
-    })
+  // function redPin(cluesId, redNum) {
+  //   let clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
+  //   clues.forEach((clue,ind) => {
+  //     if (ind<redNum)
+  //       clue.style.backgroundColor = 'red' //should do this once each time
+  //   })
+  // }
+  //
+  // //Add a white pin for each whiteNum
+  // function whitePin(cluesId, whiteNum, redNum) {
+  //   let clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
+  //   clues.forEach((clue,ind) => {
+  //     if (ind>=redNum && ind<(redNum + whiteNum))
+  //       clue.style.backgroundColor = 'white' //should do this once each time
+  //   })
+  // }
+
+  //CHECK WIN CONDITION
+  function checkWin (redNum) {
+    const codeBalls = document.querySelectorAll('.master')
+    if (redNum === codeBalls.length) {
+      console.log(codeBalls)
+      codeBalls.forEach(ball => ball.classList.remove('invisible'))
+      window.alert('Huzzah, you win!')
+    }
   }
 
-  //Add a white pin for each whiteNum
-  function whitePin(cluesId, whiteNum, redNum) {
-    let clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
-    clues.forEach((clue,ind) => {
-      if (ind>=redNum && ind<(redNum + whiteNum))
-        clue.style.backgroundColor = 'white' //should do this once each time
-    })
-  }
-  //**WIN CONDITION**
-
-  // masterBalls.classList.remove('invisible')
 
 
   function startGame() {
