@@ -12,28 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
   let masterCode = []
   let breakerCode = []
   const attempts = 10
+  const resetBtn = document.querySelector('.reset')
 
 
   //**FUNCTIONS**
 
   //CREATE THE GRID FOR THE USER CODE BREAKING ATTEMPTS && COMPUTER RESPONSES
-  const grid = document.querySelector('.grid')
-  console.log(grid)
+  function createGrid () {
+    const grid = document.querySelector('.grid')
 
-  for(let i = 0; i<attempts; i++) {
-    grid.innerHTML+=`<section class="codeBreaker flex">
-            <div class="computerSays">
-              <div data-key="${i}" class="clues clue1"></div>
-              <div data-key="${i}" class="clues clue2"></div>
-              <div data-key="${i}" class="clues clue3"></div>
-              <div data-key="${i}" class="clues clue4"></div>
-            </div>
-            <div class="breaker ball"></div>
-            <div class="breaker ball"></div>
-            <div class="breaker ball"></div>
-            <div class="breaker ball"></div>
-            <button class="attempt" id="${i}">Attempt</button>
-          </section>`
+    grid.innerHTML = ''
+    for(let i = 0; i<attempts; i++) {
+      grid.innerHTML+=`<section class="codeBreaker flex">
+              <div class="computerSays">
+                <div data-key="${i}" class="clues clue1"></div>
+                <div data-key="${i}" class="clues clue2"></div>
+                <div data-key="${i}" class="clues clue3"></div>
+                <div data-key="${i}" class="clues clue4"></div>
+              </div>
+              <div class="breaker ball"></div>
+              <div class="breaker ball"></div>
+              <div class="breaker ball"></div>
+              <div class="breaker ball"></div>
+              <button class="attempt" id="${i}">Attempt</button>
+            </section>`
+    }
+    const attemptBtns = document.querySelectorAll('.attempt')
+    attemptBtns.forEach(btn => btn.addEventListener('click', attempt, {
+      once: true
+    }))
   }
 
 
@@ -43,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ball.style.backgroundColor = colours[i]
     })
   }
-  createOptions(optionBalls) //<== put this in init() && reset()
 
 
   //CREATE THE SECRET MASTER CODE COLOURS
@@ -52,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ball.style.backgroundColor = masterCode[i]
     })
   }
+
   //CREATE NEW RANDOM MASTER CODE <== put this in init() && reset()
   function createCode() {
     //masterCode = Array()
@@ -78,10 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return breakerCode
   }
 
-  //attempt()
-  //Attempt button passes in id nr; compares arrays
-  const attemptBtns = document.querySelectorAll('.attempt')
 
+
+  const attemptBtns = document.querySelectorAll('.attempt')
+  console.log(attemptBtns)
+  //USER ATTEMPT: COMPARE THE ARRAYS (WITH NEW ID NUMBER)
   function attempt() {
     const cluesId = this.id
     //compare the master code with the last four given code breaker items
@@ -122,9 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
     checkWin(redNum)
   }
 
-  //Add red and/or white pins
+  //PIN: ADDS RED AND/OR WHITE PINS TO CLUES
   function pin(cluesId, colour, redNum = 0, whiteNum = 0) {
-    let clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
+    const clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
     clues.forEach((clue,ind) => {
       if (ind<redNum)
         clue.style.backgroundColor = 'red'
@@ -156,24 +164,36 @@ document.addEventListener('DOMContentLoaded', () => {
     if (redNum === codeBalls.length) {
       console.log(codeBalls)
       codeBalls.forEach(ball => ball.classList.remove('invisible'))
-      window.alert('Huzzah, you win!')
+      window.alert('Huzzah, you win!') //<== replace this with winScreen()
     }
   }
 
 
 
   function startGame() {
+    createGrid()
     createCode()
+    createOptions(optionBalls)
   }
   startGame()
+
+  function reset() {
+    console.log('RESET BUTTON CLICKED')
+    masterCode = []
+    breakerCode = []
+    createGrid()
+    createCode()
+    createOptions(optionBalls)
+  }
+
 
 
 
   //**EVENT LISTENERS**
   optionBalls.forEach(ball => ball.addEventListener('click', ballSelect))
-  attemptBtns.forEach(btn => btn.addEventListener('click', attempt, {
-    once: true
-  }))
+
+  resetBtn.addEventListener('click', reset)
+
 
   //add an event listener on breakerBalls -  click allows you to change THIS.color
 
