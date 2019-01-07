@@ -4,14 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const instructions = document.querySelector('p')
   const optionBalls = document.querySelectorAll('.option')
   const masterBalls = Array.prototype.slice.call(document.querySelectorAll('.master'))
-  const breakerBalls = document.querySelectorAll('.breaker')
-  const attemptBtns = document.querySelectorAll('.attempt')
+  // const breakerBalls = document.querySelectorAll('.breaker')
+
   // const clues = document.querySelectorAll('.clues')
   const colours = ['blue', 'red', 'green', 'purple', 'pink', 'white']
   let masterCode = []
   let breakerCode = []
-  const height = 10
-  const width = 6
+  const attempts = 10
 
 
   //**FUNCTIONS**
@@ -20,19 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.grid')
   console.log(grid)
 
-  for(let i = 0; i<width*height; i++) {
+  for(let i = 0; i<attempts; i++) {
     grid.innerHTML+=`<section class="codeBreaker flex">
             <div class="computerSays">
-              <div data-key="1" class="clues clue1"></div>
-              <div data-key="1" class="clues clue2"></div>
-              <div data-key="1" class="clues clue3"></div>
-              <div data-key="1" class="clues clue4"></div>
+              <div data-key="${i}" class="clues clue1"></div>
+              <div data-key="${i}" class="clues clue2"></div>
+              <div data-key="${i}" class="clues clue3"></div>
+              <div data-key="${i}" class="clues clue4"></div>
             </div>
             <div class="breaker ball"></div>
             <div class="breaker ball"></div>
             <div class="breaker ball"></div>
             <div class="breaker ball"></div>
-            <button class="attempt" id="1">Attempt</button>
+            <button class="attempt" id="${i}">Attempt</button>
           </section>`
   }
 
@@ -66,10 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
   //ballSelect(e)
   //adds that colour to the style.colour of the balls
   function ballSelect(e) {
+    const breakerBalls = document.querySelectorAll('.breaker')
     breakerCode.push(e.target.style.backgroundColor)
-    // console.log("There are " + breakerBalls.length + " balls.")
+    // console.log('There are ' + breakerBalls.length + ' balls.')
     breakerBalls.forEach((ball, i) => {
-      // console.log("Coloring ball " + i + " with color " + breakerCode[i])
+      // console.log('Coloring ball ' + i + ' with color ' + breakerCode[i])
       ball.style.backgroundColor = breakerCode[i]
     })
     console.log(breakerCode)
@@ -77,21 +77,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   //attempt()
-  //when user presses attempt button
-  //for each codeBreak ball, adds the colour to a new Array (REDUCE), breakerCode
-  //for each breakerCode element
-  //if (breakerCode[i].index === masterCode[i].index) return codeGreen()
-  //if masterCode contains breakerCode.value then return codeOrange()
+  //Attempt button passes in id nr; compares arrays
+  const attemptBtns = document.querySelectorAll('.attempt')
 
   function attempt() {
     const cluesNr = this.id
     //compare the master code with the last four given code breaker items
-    let currCode = breakerCode.slice(breakerCode.length-4)
+    const currCode = breakerCode.slice(breakerCode.length-4)
     console.log('current code is ' + currCode)
     console.log('masterCode is ' + masterCode)
     let redNum = 0
-    let usedMaster = []
-    let usedBreaker = []
+    const usedMaster = []
+    const usedBreaker = []
     currCode.forEach((e1,ind1) => {
       masterCode.forEach((e2,ind2) => {
       //if the element is identical add a red pin
