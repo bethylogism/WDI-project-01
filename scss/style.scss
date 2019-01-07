@@ -10,8 +10,8 @@ main {
   max-width: 380px;
   height: 88vh;
   margin: auto;
-  border: $darkborder;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  // border: $darkborder;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.7);
   padding: 20px;
 }
 
@@ -63,6 +63,7 @@ button {
 h1 {
   color: black;
   text-align: center;
+  margin: 10px;
 }
 
 section {
