@@ -21,7 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log(grid)
 
   for(let i = 0; i<width*height; i++) {
-    grid.innerHTML+='<div></div>'
+    grid.innerHTML+=`<section class="codeBreaker flex">
+            <div class="computerSays">
+              <div data-key="1" class="clues clue1"></div>
+              <div data-key="1" class="clues clue2"></div>
+              <div data-key="1" class="clues clue3"></div>
+              <div data-key="1" class="clues clue4"></div>
+            </div>
+            <div class="breaker ball"></div>
+            <div class="breaker ball"></div>
+            <div class="breaker ball"></div>
+            <div class="breaker ball"></div>
+            <button class="attempt" id="1">Attempt</button>
+          </section>`
   }
 
 

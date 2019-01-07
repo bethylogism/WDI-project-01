@@ -1,8 +1,3 @@
-$theblue: #0C51BE;
-$electricblue: #64B9EE;
-$theyellow: #EDCF2E;
-$theorange: #EFB93D;
-$lightborder: 3px double $theyellow;
 $darkborder: 3px double black;
 
 * {
@@ -18,7 +13,7 @@ h1 {
 
 main {
   max-width: 380px;
-  height: 85vh;
+  height: 80vh;
   margin: auto;
   border: $darkborder;
   padding: 20px;
@@ -101,11 +96,19 @@ p {
   //move this into the section above and flex-wrap and flex-grow 1;
 }
 
+.option {
+  cursor: pointer;
+}
+
+//HOVER STATES
+//make css classes called different colours: .red .yellow. etc
+//create .red:hover {background-color: [variation]} colours within that
+
 
 .body2 {
   align-items: center;
   display: flex;
-  height: 40vh;
+  height: 30vh;
   justify-content: center;
   margin: 0;
 }
@@ -118,13 +121,13 @@ p {
   flex-wrap: wrap;
   height: 100%;
   justify-content: center;
-  max-height: 600px;
-  max-width: 400px;
+  max-height: 400px;
+  max-width: 300px;
 }
 
 .grid div {
   flex-grow: 1;
-  height: 10%;
-  width: 10%;
+  height: 15%;
+  width: 15%;
   border: 1px solid black;
 }
