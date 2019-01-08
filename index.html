@@ -9,8 +9,8 @@
   </head>
   <body>
     <h1>Mastermind</h1>
-    <main class="vanish">
-
+    <!-- Add class 'vanish' to main once read to publish-->
+    <main>
       <section class="codeMaster flex">
         <div class="master ball invisible"></div>
         <div class="master ball invisible"></div>
@@ -18,11 +18,17 @@
         <div class="master ball invisible"></div>
       </section>
 
-<!-- User codeBreaking board -->
+    <!-- User codeBreaking board -->
     <div class="board">
       <div class="grid"></div>
     </div>
+    <!-- win screen -->
+    <div class="win vanish">
+      <p>Congratulations! You cracked the code.</p>
+      <button class="play">Play Again!</button>
+    </div>
 
+      <!-- User options -->
       <p>Choose your colours</p>
       <section class="options flex">
         <div class="option1 option ball"></div>
@@ -36,6 +42,7 @@
 
     </main>
     <div class="welcome">
+      <p>Are you a code breaker? I have hidden four balls in a particular order. Crack the code to win.</p>
       <button class="play">Play Mastermind</button>
     </div>
   </body>

@@ -15,18 +15,16 @@ main, .welcome {
   padding: 20px;
 }
 
-
-.vanish {
-   display: none;
-}
-
-
-.board {
+.board, .win {
   align-items: center;
   display: flex;
   height: 60vh;
   justify-content: center;
   margin: 0;
+}
+
+.vanish {
+   display: none;
 }
 
 .grid {

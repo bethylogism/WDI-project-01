@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const playBtn = document.querySelector('.play')
   const game = document.querySelector('main')
   const welcomeScreen = document.querySelector('.welcome')
+  const win = document.querySelector('.win')
 
   function vanish() {
     welcomeScreen.classList.add('vanish')
     game.classList.remove('vanish')
-    console.log(game, welcomeScreen)
   }
 
   playBtn.addEventListener('click', startGame)
@@ -178,7 +178,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-
+  function winScreen() {
+    game.classList.add('vanish')
+    win.classList.remove('vanish')
+  }
 
   function startGame() {
     createGrid()
@@ -186,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createOptions(optionBalls)
     vanish()
   }
-
+  startGame()
 
   function reset() {
     console.log('RESET BUTTON CLICKED')
