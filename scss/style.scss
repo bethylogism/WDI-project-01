@@ -1,32 +1,84 @@
-$theblue: #0C51BE;
-$electricblue: #64B9EE;
-$theyellow: #EDCF2E;
-$theorange: #EFB93D;
-$lightborder: 3px double $theyellow;
 $darkborder: 3px double black;
+$shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+$rainbow: linear-gradient(0.25turn, red, yellow, green, blue, violet);
+$rainbow-light: linear-gradient(0.25turn, red, yellow, green, blue, violet), 50%;
 
 * {
   box-sizing: border-box;
   font-family: "Poiret One", sans-serif;
+//   @media screen and (min-width: 900px) and (max-width: 700px) {
+//     font-size: 1.1rem;
+//   }
+//   @media screen and (max-width: 500px) {
+//   font-size: 1rem;
+// }
+  // text-transform: uppercase;
 }
 
 h1 {
   color: black;
   text-align: center;
+  @media screen and (max-width: 700px) {
+    margin: 10px;
+    //font-size: 2.5rem;
+  }
 }
 
-main {
-  max-width: 380px;
-  height: 85vh;
-  margin: auto;
-  border: $darkborder;
-  padding: 20px;
+p {
+  text-align: center;
 }
+
+main, .welcome {
+  max-width: 380px;
+  margin: 0 auto;
+  // border: $darkborder;
+  box-shadow: $shadow;
+  padding: 20px;
+  /* mobile & iPad view */
+  @media screen and (max-width: 700px) {
+      max-width: none;
+      //width: 90vw;
+      margin: 0 auto;
+      box-shadow: none;
+      padding: none;
+  }
+  @media screen and (max-width: 500px) {
+      max-width: none;
+      //width: 100vw;
+      margin: auto;
+      box-shadow: none;
+      padding: none;
+  }
+}
+
+.board {
+  align-items: center;
+  display: flex;
+  //height: 60vh;
+  justify-content: center;
+  margin: 0;
+  //background-color: red;
+}
+
 
 button {
-  // text-transform: uppercase;
-  font-weight: 800;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  border: $darkborder;
+  //box-shadow: $shadow;
+  //padding: 5px 15px 5px 15px;
+  &:focus  {
+    outline: none;
+  }
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  &:active {
+    outline: -webkit-focus-ring-color auto 5px;
+  }
 }
+
 
 .flex {
   display: flex;
@@ -41,28 +93,78 @@ button {
   border-radius: 100%;
   margin: 2px;
   transition: all .5s;
+  @media screen and (max-width: 700px) {
+    height: 40px;
+    width: 40px;
+  }
+  @media screen and (max-width: 500px) {
+    height: 25px;
+    width: 25px;
+  }
+}
+
+
+.grid {
+  align-items: center;
+  display: flex;
+  //flex-grow: 1;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  //  & div {
+  //   //border: 1px solid black;
+  // }
 }
 
 section {
-  justify-content: center;
+  justify-content: center; // this is getting overridden
   padding: 3px 10px;
   // border: $lightborder;
   margin: 1px;
   &.codeMaster {
-    background: black;
-    background-image: url('./assets/questions.png');
-    height: 40px;
+    //background: black;
+    background-image: url('../assets/questions.png');
+    height: 55px;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 40%;
+    @media screen and (max-width: 700px) {
+      height: 50px;
+      background-size: 25%;
+    }
+    @media screen and (max-width: 500px) {
+      height: 50px;
+      background-size: 35%;
+    }
       & .master {
-      opacity: 0.4;
+      // opacity: 0.9;
     }
   }
-  &.codeBreaker {
-    background: white;
-    button {
-      margin: auto;
+  &.codeBreaker { // the repeating  div with the 3 core divs in
+    //background: #ff00ff;
+    justify-content: space-around;
+    width: 80%;
+    .spacer {
+    //flex-grow: 1;
+    width: 20%;
+    //background: blue;
+    //justify-content: space-around;
+    //justify-content: center;
+    }
+    .end {
+      justify-content: flex-end;
+    }
+    .breakerBalls {
+      //background: orange;
+      justify-content: center;
+    }
+    button { //attempt button
+        @media screen and (max-width: 700px) {
+        padding: 0 10px;
+      }
+        @media screen and (max-width: 500px) {
+        padding: 0 20px;
+      }
     }
     .computerSays {
       display: flex;
@@ -70,9 +172,18 @@ section {
       width: 30px;
       height: 30px;
       border: $darkborder;
-      margin: auto;
+      //box-shadow: $shadow;
+      //margin: 0 15px 0 42px;
+      @media screen and (max-width: 700px) {
+      width: 40px;
+      height: 40px;
+      }
+      @media screen and (max-width: 500px) {
+        height: 30px;
+        width: 30px;
+      }
       .clues {
-        background-color: black;
+        background-color: transparent;
         border: 1px solid black;
         height: 50%;
         width: 50%;
@@ -84,19 +195,76 @@ section {
 }
 
 
+.reset, .play {
+  width: 50%;
+  margin: 10px;
+  background-image: $rainbow;
+  color: white;
+
+  @media screen and (max-width: 500px) {
+    width: 80%;
+  }
+}
+
+
 .vanish {
    display: none;
-}
-// OR
-.visible {
-  opacity: 100%;
+  transition: all 0.5s;
+  pointer-events: none;
 }
 
-p {
-  text-align: center;
+.popup.open {
+  opacity: 1;
+  pointer-events: all;
 }
 
-.reset {
-  width: 50%;
-  //move this into the section above and flex-wrap and flex-grow 1;
+
+.invisible {
+  opacity: 0;
 }
+
+.option {
+  cursor: copy;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+//HOVER STATES
+//make css classes called different colours: .red .yellow. etc
+//create .red:hover {background-color: [variation]} colours within that
