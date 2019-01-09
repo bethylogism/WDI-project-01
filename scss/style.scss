@@ -172,6 +172,7 @@ section {
       width: 30px;
       height: 30px;
       border: $darkborder;
+
       //box-shadow: $shadow;
       //margin: 0 15px 0 42px;
       @media screen and (max-width: 700px) {
@@ -183,7 +184,7 @@ section {
         width: 30px;
       }
       .clues {
-        background-color: transparent;
+        background-color: grey;
         border: 1px solid black;
         height: 50%;
         width: 50%;
@@ -268,3 +269,22 @@ section {
 //HOVER STATES
 //make css classes called different colours: .red .yellow. etc
 //create .red:hover {background-color: [variation]} colours within that
+.option {
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
+  animation-name: wobble;
+  animation-timing-function: ease-in-out;
+}
+
+.option:hover {
+  animation: none;
+}
+
+@keyframes wobble {
+      0% { transform: rotate( 0   ) translate3d( 0,    0,   0) }
+     25% { transform: rotate( 2deg) translate3d( 1px,  0,   0) }
+     50% { transform: rotate(-1deg) translate3d( 0,   -1px, 0) }
+     75% { transform: rotate( 1deg) translate3d(-1px,  0  , 0) }
+    100% { transform: rotate(-2deg) translate3d(-1px, -1px, 0) }
+
+}

@@ -99,9 +99,15 @@ document.addEventListener('DOMContentLoaded', () => {
     return breakerCode
   }
 
+  // function attemptValidity() {
+  //   if (breakerCode.length%4 !== 0) {
+  //     alert('Select more colours.')
+  //   }
+
+
+
 
   //USER ATTEMPT: COMPARE THE ARRAYS (WITH NEW ID NUMBER)
-  const attemptBtns = document.querySelectorAll('.attempt')
 
   function attempt() {
     this.classList.add('invisible')
@@ -152,6 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
         clue.style.backgroundColor = 'red'
       if (ind>=redNum && ind<(redNum + whiteNum))
         clue.style.backgroundColor = `${colour}` //should do this once each time
+      if (ind>=(redNum + whiteNum))
+        clue.style.backgroundColor = 'black'
     })
   }
 
