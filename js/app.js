@@ -2,11 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //**VARIABLES**
   const optionBalls = document.querySelectorAll('.option')
-  //Grab masterBalls as an array not a nodeList:
+  //Grab as an array not a nodeList:
   const masterBalls = Array.prototype.slice.call(document.querySelectorAll('.master'))
-  // const breakerBalls = document.querySelectorAll('.breaker')
-
-  // const clues = document.querySelectorAll('.clues')
   const colours = ['blue', 'red', 'orange', 'purple', 'pink', 'yellow']
   let masterCode = []
   let breakerCode = []
@@ -34,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     grid.innerHTML = ''
     for(let i = 0; i<attempts; i++) {
       grid.innerHTML+=`<section class="codeBreaker flex">
-            <div class="spacer flex">
+            <div class="spacer flex end">
                 <div class="computerSays">
                   <div data-key="${i}" class="clues clue1"></div>
                   <div data-key="${i}" class="clues clue2"></div>
@@ -157,22 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  // function redPin(cluesId, redNum) {
-  //   let clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
-  //   clues.forEach((clue,ind) => {
-  //     if (ind<redNum)
-  //       clue.style.backgroundColor = 'red' //should do this once each time
-  //   })
-  // }
-  //
-  // //Add a white pin for each whiteNum
-  // function whitePin(cluesId, whiteNum, redNum) {
-  //   let clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
-  //   clues.forEach((clue,ind) => {
-  //     if (ind>=redNum && ind<(redNum + whiteNum))
-  //       clue.style.backgroundColor = 'white' //should do this once each time
-  //   })
-  // }
 
   //CHECK WIN CONDITION
   function checkWin (redNum) {
@@ -230,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.style.display = 'none'
     }
   })
-
 
 
   //**EVENT LISTENERS**
