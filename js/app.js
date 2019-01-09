@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   //**VARIABLES**
-  const instructions = document.querySelector('p')
   const optionBalls = document.querySelectorAll('.option')
   //Grab masterBalls as an array not a nodeList:
   const masterBalls = Array.prototype.slice.call(document.querySelectorAll('.master'))
@@ -35,17 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
     grid.innerHTML = ''
     for(let i = 0; i<attempts; i++) {
       grid.innerHTML+=`<section class="codeBreaker flex">
-              <div class="computerSays">
-                <div data-key="${i}" class="clues clue1"></div>
-                <div data-key="${i}" class="clues clue2"></div>
-                <div data-key="${i}" class="clues clue3"></div>
-                <div data-key="${i}" class="clues clue4"></div>
+            <div class="spacer flex">
+                <div class="computerSays">
+                  <div data-key="${i}" class="clues clue1"></div>
+                  <div data-key="${i}" class="clues clue2"></div>
+                  <div data-key="${i}" class="clues clue3"></div>
+                  <div data-key="${i}" class="clues clue4"></div>
+                </div>
               </div>
-              <div class="breaker ball"></div>
-              <div class="breaker ball"></div>
-              <div class="breaker ball"></div>
-              <div class="breaker ball"></div>
-              <button class="attempt" id="${i}">Attempt</button>
+              <div class="breakerBalls flex">
+                <div class="breaker ball"></div>
+                <div class="breaker ball"></div>
+                <div class="breaker ball"></div>
+                <div class="breaker ball"></div>
+              </div>
+              <div class="spacer flex">
+                <button class="attempt" id="${i}">Attempt</button>
+              </div>
             </section>`
     }
     const attemptBtns = document.querySelectorAll('.attempt')
@@ -97,10 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-
-  const attemptBtns = document.querySelectorAll('.attempt')
   //USER ATTEMPT: COMPARE THE ARRAYS (WITH NEW ID NUMBER)
+  const attemptBtns = document.querySelectorAll('.attempt')
+
   function attempt() {
+    this.classList.add('invisible')
     const cluesId = this.id
     //compare the master code with the last four given code breaker items
     const currCode = breakerCode.slice(breakerCode.length-4)
@@ -178,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+//NEED TO WORK ON THE POP UP FOR THIS <----
   function winScreen() {
     game.classList.add('vanish')
     win.classList.remove('vanish')
@@ -198,6 +205,31 @@ document.addEventListener('DOMContentLoaded', () => {
     startGame()
   }
 
+  // Get the modal
+  var modal = document.querySelector('.modal')
+
+  // Get the button that opens the modal
+  var instructBtn = document.querySelector('.instructions-button') //<= CHANGE TO POPUP
+
+  // Get the <span> element that closes the modal
+  var span = document.querySelector('.close')
+
+  // When the user clicks on the button, open the modal
+  instructBtn.addEventListener('click', () => {
+    modal.style.display = 'block'
+  })
+
+  // When the user clicks on <span> (x), close the modal
+  span.addEventListener('click', () => {
+    modal.style.display = 'none'
+  })
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none'
+    }
+  })
 
 
 

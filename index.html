@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
     <title>Mastermind Game</title>
@@ -22,11 +23,6 @@
     <div class="board">
       <div class="grid"></div>
     </div>
-    <!-- win screen -->
-    <div class="win vanish">
-      <p>Congratulations! You cracked the code.</p>
-      <button class="play">Play Again!</button>
-    </div>
 
       <!-- User options -->
       <p>Choose your colours</p>
@@ -40,10 +36,24 @@
         <button class="reset">Restart Game</button>
       </section>
 
+      <!-- Button for Instructions Modal -->
+      <button class="instructions-button">Instructions</button>
+
+      <!-- The Modal -->
+      <div class="instructions modal">
+        <!-- Modal content -->
+        <div class="instructions modal-content">
+          <span class="close">&times;</span>
+          <p>Some text in the Modal..</p>
+        </div>
+      </div>
     </main>
-    <div class="welcome">
-      <p>Are you a code breaker? I have hidden four balls in a particular order. Crack the code to win.</p>
-      <button class="play">Play Mastermind</button>
-    </div>
+      <!-- Welcome screen -->
+      <div class="welcome">
+        <p>Are you a code breaker? I have hidden four balls in a particular order. Crack the code to win.</p>
+        <!-- Make this look like the reset btn -->
+        <button class="play">Play Mastermind</button>
+      </div>
+    <footer></footer>
   </body>
 </html>
