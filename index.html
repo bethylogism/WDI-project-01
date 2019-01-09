@@ -2,151 +2,29 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
-    <title>Mastermind</title>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,400|Poiret+One|Raleway:400,600,700" rel="stylesheet">
+    <title>Mastermind Game</title>
     <script src="js/app.js" charset="utf-8"></script>
   </head>
   <body>
     <h1>Mastermind</h1>
+    <!-- Add class 'vanish' to main once read to publish-->
     <main>
-
       <section class="codeMaster flex">
-        <div class="master ball"></div>
-        <div class="master ball"></div>
-        <div class="master ball"></div>
-        <div class="master ball"></div>
+        <div class="master ball invisible"></div>
+        <div class="master ball invisible"></div>
+        <div class="master ball invisible"></div>
+        <div class="master ball invisible"></div>
       </section>
-      <section class="codeBreaker flex">
-        <div class="computerSays">
-          <div data-key="1" class="clues clue1"></div>
-          <div data-key="1" class="clues clue2"></div>
-          <div data-key="1" class="clues clue3"></div>
-          <div data-key="1" class="clues clue4"></div>
-        </div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <button class="attempt" id="1">Attempt</button>
-      </section>
-      <section class="codeBreaker flex">
-        <div class="computerSays">
-          <div data-key="2" class="clues clue1"></div>
-          <div data-key="2" class="clues clue2"></div>
-          <div data-key="2" class="clues clue3"></div>
-          <div data-key="2" class="clues clue4"></div>
-        </div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <button class="attempt" id="2">Attempt</button>
-      </section>
-      <section class="codeBreaker flex">
-        <div class="computerSays">
-          <div data-key="3" class="clues clue1"></div>
-          <div data-key="3" class="clues clue2"></div>
-          <div data-key="3" class="clues clue3"></div>
-          <div data-key="3" class="clues clue4"></div>
-        </div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <button class="attempt" id="3">Attempt</button>
-      </section>
-      <section class="codeBreaker flex">
-        <div class="computerSays">
-          <div data-key="4" class="clues clue1"></div>
-          <div data-key="4" class="clues clue2"></div>
-          <div data-key="4" class="clues clue3"></div>
-          <div data-key="4" class="clues clue4"></div>
-        </div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <button class="attempt" id="4">Attempt</button>
-      </section>
-      <section class="codeBreaker flex">
-        <div class="computerSays">
-          <div data-key="5" class="clues clue1"></div>
-          <div data-key="5" class="clues clue2"></div>
-          <div data-key="5" class="clues clue3"></div>
-          <div data-key="5" class="clues clue4"></div>
-        </div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <button class="attempt" id="5">Attempt</button>
-      </section>
-      <section class="codeBreaker flex">
-        <div class="computerSays">
-          <div data-key="6" class="clues clue1"></div>
-          <div data-key="6" class="clues clue2"></div>
-          <div data-key="6" class="clues clue3"></div>
-          <div data-key="6" class="clues clue4"></div>
-        </div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <button class="attempt" id="6">Attempt</button>
-      </section>
-      <section class="codeBreaker flex">
-        <div class="computerSays">
-          <div data-key="7" class="clues clue1"></div>
-          <div data-key="7" class="clues clue2"></div>
-          <div data-key="7" class="clues clue3"></div>
-          <div data-key="7" class="clues clue4"></div>
-        </div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <button class="attempt" id="7">Attempt</button>
-      </section>
-      <section class="codeBreaker flex">
-        <div class="computerSays">
-          <div data-key="8" class="clues clue1"></div>
-          <div data-key="8" class="clues clue2"></div>
-          <div data-key="8" class="clues clue3"></div>
-          <div data-key="8" class="clues clue4"></div>
-        </div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <button class="attempt" id="8">Attempt</button>
-      </section>
-      <section class="codeBreaker flex">
-        <div class="computerSays">
-          <div data-key="9" class="clues clue1"></div>
-          <div data-key="9" class="clues clue2"></div>
-          <div data-key="9" class="clues clue3"></div>
-          <div data-key="9" class="clues clue4"></div>
-        </div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <button class="attempt" id="9">Attempt</button>
-      </section>
-      <section class="codeBreaker flex">
-        <div class="computerSays">
-          <div data-key="10" class="clues clue1"></div>
-          <div data-key="10" class="clues clue2"></div>
-          <div data-key="10" class="clues clue3"></div>
-          <div data-key="10" class="clues clue4"></div>
-        </div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <div class="breaker ball"></div>
-        <button class="attempt" id="10">Attempt</button>
-      </section>
+
+    <!-- User codeBreaking board -->
+    <div class="board">
+      <div class="grid"></div>
+    </div>
+
+      <!-- User options -->
       <p>Choose your colours</p>
       <section class="options flex">
         <div class="option1 option ball"></div>
@@ -155,9 +33,27 @@
         <div class="option4 option ball"></div>
         <div class="option5 option ball"></div>
         <div class="option6 option ball"></div>
+        <button class="reset">Restart Game</button>
       </section>
-      <button class="reset">Restart Game</button>
-    </main>
 
+      <!-- Button for Instructions Modal -->
+      <button class="instructions-button">Instructions</button>
+
+      <!-- The Modal -->
+      <div class="instructions modal">
+        <!-- Modal content -->
+        <div class="instructions modal-content">
+          <span class="close">&times;</span>
+          <p>Some text in the Modal..</p>
+        </div>
+      </div>
+    </main>
+      <!-- Welcome screen -->
+      <div class="welcome">
+        <p>Are you a code breaker? I have hidden four balls in a particular order. Crack the code to win.</p>
+        <!-- Make this look like the reset btn -->
+        <button class="play">Play Mastermind</button>
+      </div>
+    <footer></footer>
   </body>
 </html>
