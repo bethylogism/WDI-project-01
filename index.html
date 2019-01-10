@@ -18,6 +18,8 @@
         <div class="master ball invisible"></div>
         <div class="master ball invisible"></div>
       </section>
+      <!-- Add win/lose text here??  -->
+      <div class="says"></div>
 
     <!-- User codeBreaking board -->
     <div class="board">
@@ -33,27 +35,50 @@
         <div class="option4 option ball"></div>
         <div class="option5 option ball"></div>
         <div class="option6 option ball"></div>
+
         <button class="reset">Restart Game</button>
       </section>
 
-      <!-- Button for Instructions Modal -->
+
+      <!-- Button for Instructions -->
       <button class="instructions-button">Instructions</button>
 
-      <!-- The Modal -->
+      <!-- The modal for instructions -->
       <div class="instructions modal">
         <!-- Modal content -->
         <div class="instructions modal-content">
           <span class="close">&times;</span>
-          <p>Some text in the Modal..</p>
+          <h2>Instructions</h2>
+          <p>Mastermind is a code-breaking game. You win the game when you manage to guess all the colors in the code sequence and when they are all in the correct position.</p>
+
+            <p>If you reach the end of the board without guessing correctly, you lose!
+          </p>
+          <p>I will give you clues as to how close you are to the correct pattern ,which may inform your next guess.</p>
+          <h3>Clues:</h3>
+          <div class="instructions-flex">
+            <figure>
+              <div class="test-clues black-clue"></div>
+              <figcaption>One of your colours is not even in the code in any position! </figcaption>
+            </figure>
+            <figure>
+              <div class="test-clues white-clue"></div>
+              <figcaption>You've guessed the correct colour... but it's in the incorrect position!</figcaption>
+            </figure>
+            <figure>
+              <div class="test-clues red-clue"></div>
+              <figcaption>You've cracked a piece of the code. One your chosen colours is in the correct position in the sequence.</figcaption>
+            </figure>
+          </p>
+        </div>
         </div>
       </div>
     </main>
       <!-- Welcome screen -->
       <div class="welcome">
-        <p>Are you a code breaker? I have hidden four balls in a particular order. Crack the code to win.</p>
-        <!-- Make this look like the reset btn -->
+        <p>Are you a code breaker? I have hidden <span>some</span> coloured balls in a particular sequence. Crack the code to win.</p>
         <button class="play">Play Mastermind</button>
       </div>
+
     <footer></footer>
   </body>
 </html>

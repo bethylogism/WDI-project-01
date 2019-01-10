@@ -1,7 +1,7 @@
 $darkborder: 3px double black;
 $shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 $rainbow: linear-gradient(0.25turn, red, yellow, green, blue, violet);
-$rainbow-light: linear-gradient(0.25turn, red, yellow, green, blue, violet), 50%;
+$rainbow-light: linear-gradient(0.75turn, red, yellow, green, blue, violet);
 
 * {
   box-sizing: border-box;
@@ -15,7 +15,7 @@ $rainbow-light: linear-gradient(0.25turn, red, yellow, green, blue, violet), 50%
   // text-transform: uppercase;
 }
 
-h1 {
+h1, h2, h3 {
   color: black;
   text-align: center;
   @media screen and (max-width: 700px) {
@@ -121,6 +121,7 @@ section {
   padding: 3px 10px;
   // border: $lightborder;
   margin: 1px;
+
   &.codeMaster {
     //background: black;
     background-image: url('../assets/questions.png');
@@ -144,6 +145,7 @@ section {
     //background: #ff00ff;
     justify-content: space-around;
     width: 80%;
+
     .spacer {
     //flex-grow: 1;
     width: 20%;
@@ -201,6 +203,9 @@ section {
   margin: 10px;
   background-image: $rainbow;
   color: white;
+  &:hover {
+    background-image: $rainbow-light;
+  }
 
   @media screen and (max-width: 500px) {
     width: 80%;
@@ -214,10 +219,10 @@ section {
   pointer-events: none;
 }
 
-.popup.open {
-  opacity: 1;
-  pointer-events: all;
-}
+// .popup.open {
+//   opacity: 1;
+//   pointer-events: all;
+// }
 
 
 .invisible {
@@ -248,7 +253,43 @@ section {
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 70%; /* Could be more or less, depending on screen size */
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  }
+
+    .instructions-flex {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      @media screen and (max-width: 500px) {
+        display: block;
+      }
+      figure {
+        width: 30%;
+
+        @media screen and (max-width: 500px) {
+          max-width: inherit;
+        }
+      }
+      .test-clues {
+        margin: 10px 0;
+        border: 1px solid black;
+        height: 15px;
+        width: 15px;
+        border-radius: 100%;
+        transition: all .5s;
+      }
+      .black-clue {
+        background-color: black;
+      }
+      .white-clue {
+        background-color: white;
+      }
+      .red-clue {
+        background-color: red;
+    }
+  }
 }
 
 /* The Close Button */
@@ -269,7 +310,7 @@ section {
 //HOVER STATES
 //make css classes called different colours: .red .yellow. etc
 //create .red:hover {background-color: [variation]} colours within that
-.option {
+.option, .codeMaster {
   animation-duration: 0.4s;
   animation-iteration-count: infinite;
   animation-name: wobble;

@@ -7,13 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const colours = ['blue', 'red', 'orange', 'purple', 'pink', 'yellow']
   let masterCode = []
   let breakerCode = []
-  const attempts = 10
+  const attempts = 2
+  const codeLength = 4
   const resetBtn = document.querySelector('.reset')
   const playBtn = document.querySelector('.play')
   const game = document.querySelector('main')
   const welcomeScreen = document.querySelector('.welcome')
-  const win = document.querySelector('.win')
+  const codemasterSays = document.querySelector('.says')
 
+  //              ** WELCOME SCREEN **
   function vanish() {
     welcomeScreen.classList.add('vanish')
     game.classList.remove('vanish')
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  //**FUNCTIONS**
+  //              ** FUNCTIONS **
 
   //CREATE THE GRID FOR THE USER CODE BREAKING ATTEMPTS && COMPUTER RESPONSES
   function createGrid () {
@@ -31,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     grid.innerHTML = ''
     for(let i = 0; i<attempts; i++) {
-      grid.innerHTML+=`<section class="codeBreaker flex">
+      grid.innerHTML+=`<section class="codeBreaker flex" data-index="${i}">
             <div class="spacer flex end">
                 <div class="computerSays">
                   <div data-key="${i}" class="clues clue1"></div>
@@ -53,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const attemptBtns = document.querySelectorAll('.attempt')
     attemptBtns.forEach(btn => btn.addEventListener('click', attempt, {
-      once: true
+      once: true // Modify this - class should just remove pointer events
     }))
   }
 
@@ -85,35 +87,52 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  //ballSelect(e)
+  //PLAYER SELECTS COLOURS
   //adds that colour to the style.colour of the balls
   function ballSelect(e) {
     const breakerBalls = document.querySelectorAll('.breaker')
     breakerCode.push(e.target.style.backgroundColor)
-    // console.log('There are ' + breakerBalls.length + ' balls.')
     breakerBalls.forEach((ball, i) => {
-      // console.log('Coloring ball ' + i + ' with color ' + breakerCode[i])
+      // colour ball with the defined colours
       ball.style.backgroundColor = breakerCode[i]
     })
     console.log(breakerCode)
     return breakerCode
   }
 
+
+
+  //function highlightButton() {
+
+    // const attemptButton = document.querySelector(`#${i}`)
+    //console.log(attemptButton)
+    // attemptButton.classList.add('highlight')
+  //}
+
+  //CHECK IF THE NUMBER OF COLOURS IS VALID (MULTIPLE OF FOUR?)
   // function attemptValidity() {
   //   if (breakerCode.length%4 !== 0) {
   //     alert('Select more colours.')
   //   }
+  //if number of balls is less than four OR if it is not a multiple of four, then
 
 
+    //** play conditions (also highlight conditions) **
+    //breakerCode.length === codeLength
+    //rowId = 1 <-- use this to find grab the button with this id: #${i}
+    //or multiple of master code length
+    //(breakerCode.length%codeLength === 0)
+    //in which case rowId = breakerCode.length / codeLength
 
 
   //USER ATTEMPT: COMPARE THE ARRAYS (WITH NEW ID NUMBER)
 
   function attempt() {
-    this.classList.add('invisible')
+
+    this.classList.add('invisible') //maybe change this to semi-visible 
     const cluesId = this.id
     //compare the master code with the last four given code breaker items
-    const currCode = breakerCode.slice(breakerCode.length-4)
+    const currCode = breakerCode.slice(breakerCode.length-codeLength)
     console.log('current code is ' + currCode)
     console.log('masterCode is ' + masterCode)
     let redNum = 0
@@ -164,21 +183,37 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  //CHECK WIN CONDITION
+  //CHECK WIN CONDITION && LOSE CONDITION
   function checkWin (redNum) {
+
     const codeBalls = document.querySelectorAll('.master')
-    if (redNum === codeBalls.length) {
-      console.log(codeBalls)
+    let outcome = ''
+    //Reveal the code to the Player
+    if ((redNum === codeBalls.length) || (breakerCode.length === (attempts*codeLength))) {
       codeBalls.forEach(ball => ball.classList.remove('invisible'))
-      window.alert('Huzzah, you win!') //<== replace this with winScreen()
+    }
+    //WIN: Player code balls are identical to master code balls
+    if (redNum === codeBalls.length) {
+      outcome = 'win'
+      outcomeText(outcome)
+    }
+    //LOSE: Reach the end and the last balls in the array not the master balls
+    if (breakerCode.length === (attempts*codeLength) && (redNum !== codeBalls.length)) {
+      outcome = 'lose'
+      outcomeText(outcome)
     }
   }
 
-//NEED TO WORK ON THE POP UP FOR THIS <----
-  function winScreen() {
-    game.classList.add('vanish')
-    win.classList.remove('vanish')
+
+  //Tell the user if they've won or lost by adding text under correct code
+  function outcomeText(outcome) {
+    if(outcome === 'win'){
+      codemasterSays.textContent = 'You have won. Play again, if you dare.'
+    } else {
+      codemasterSays.textContent = 'You have lost. Redeem yourself and play again.'
+    }
   }
+
 
   function startGame() {
     createGrid()
