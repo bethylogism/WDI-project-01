@@ -18,8 +18,16 @@
         <div class="master ball invisible"></div>
         <div class="master ball invisible"></div>
       </section>
-      <!-- Add win/lose text here??  -->
-      <div class="says"></div>
+
+      <!-- The modal for outcome -->
+      <div class="outcome modal">
+        <div class="modal-content">
+          <span class="close-outcome close">&times;</span>
+          <!-- Add win/lose text here??  -->
+          <p class="says">Did you win?</p>
+          <button class="play">Play Again</button>
+        </div>
+      </div>
 
     <!-- User codeBreaking board -->
     <div class="board">
@@ -46,7 +54,7 @@
       <!-- The modal for instructions -->
       <div class="instructions modal">
         <!-- Modal content -->
-        <div class="instructions modal-content">
+        <div class="modal-content">
           <span class="close">&times;</span>
           <h2>Instructions</h2>
           <p>Mastermind is a code-breaking game. You win the game when you manage to guess all the colors in the code sequence and when they are all in the correct position.</p>
