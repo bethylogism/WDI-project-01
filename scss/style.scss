@@ -1,5 +1,5 @@
 $darkborder: 3px double black;
-$shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+$shadow: 0 0 50px 0 rgba(0, 0, 0, 0.6);
 $rainbow: linear-gradient(0.35turn, red, orange, green, blue, violet);
 $rainbow-light: linear-gradient(0.45turn, red, orange, green, blue, violet);
 
@@ -30,6 +30,7 @@ p {
 
 main, .welcome {
   max-width: 380px;
+  border-radius: 10px;
   margin: 0 auto;
   // border: $darkborder;
   box-shadow: $shadow;
@@ -49,6 +50,28 @@ main, .welcome {
       box-shadow: none;
       padding: none;
   }
+}
+WELCOME SCREEN BACKGROUND
+// .behind {
+//   img {
+//
+//   }
+// }
+.behind {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  //overflow: auto;
+  //background-color: rgb(0,0,0);
+  //background-color: rgba(0,0,0,0.4);
+  background-image: url('../assets/mastermind-01.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40%;
 }
 
 .board {
@@ -237,7 +260,7 @@ section {
   cursor: copy;
 }
 
-/* The Modal (background) */
+/* The Modal Background */
 .modal {
   display: none;
   position: fixed;
@@ -249,6 +272,7 @@ section {
   overflow: auto;
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
+  //background-image: url('../assets/mastermind-01.jpg')
 }
 
 /* Modal Content/Box */
@@ -297,7 +321,7 @@ section {
 }
 
 /* The Close Button */
-.close {
+.close, .close-outcome {
   color: #aaa;
   float: right;
   font-size: 28px;
