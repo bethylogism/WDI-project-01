@@ -10,8 +10,8 @@
   </head>
   <body>
     <h1>Mastermind</h1>
-    <!-- Add class 'vanish' to main once read to publish-->
-    <main>
+    <!-- Add class 'vanish' to main once ready to publish-->
+    <main class="vanish">
       <section class="codeMaster flex">
         <div class="master ball invisible"></div>
         <div class="master ball invisible"></div>
@@ -23,9 +23,9 @@
       <div class="outcome modal">
         <div class="modal-content">
           <span class="close-outcome close">&times;</span>
-          <!-- Add win/lose text here??  -->
-          <p class="says">Did you win?</p>
-          <button class="play">Play Again</button>
+          <!-- Computer says...  -->
+          <h2 class="says"></h2>
+          <h2><button class="play-again">Play Again</button><h2>
         </div>
       </div>
 
@@ -84,7 +84,7 @@
       <!-- Welcome screen -->
       <div class="welcome">
         <p>Are you a code breaker? I have hidden <span>some</span> coloured balls in a particular sequence. Crack the code to win.</p>
-        <button class="play">Play Mastermind</button>
+        <h2><button class="start">Play Mastermind</button></h2>
       </div>
 
     <footer></footer>

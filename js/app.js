@@ -11,21 +11,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const attempts = 10
   const codeLength = 4
   const resetBtn = document.querySelector('.reset')
-  const playBtn = document.querySelector('.play')
   const game = document.querySelector('main')
   const welcomeScreen = document.querySelector('.welcome')
-  const codemasterSays = document.querySelector('.says')
+  const startBtn = document.querySelector('.start')
+
   let rowId = -1
   let contin = true
 
 
-  //              ** WELCOME SCREEN **
+
+  //              ** REMOVE WELCOME SCREEN **
+
+  //playBtn.addEventListener('click', () => console.log('hallo?')) //play)
+  startBtn.addEventListener('click', startGame)
   function vanish() {
     welcomeScreen.classList.add('vanish')
     game.classList.remove('vanish')
   }
 
-  playBtn.addEventListener('click', startGame)
 
 
 
@@ -58,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </section>`
     }
     const attemptBtns = document.querySelectorAll('.attempt')
-    attemptBtns.forEach(btn => btn.addEventListener('click', maybePlayBe))
+    attemptBtns.forEach(btn => btn.addEventListener('click', attempt))
   }
 
 
@@ -89,8 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  //PLAYER SELECTS COLOURS
-  //adds that colour to the style.colour of the balls
+  //PLAYER SELECT COLOURS && ADDS THEM TO BALLS
   function ballSelect(e) {
     if (contin === true) {
       const breakerBalls = document.querySelectorAll('.breaker')
@@ -107,8 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   //USER ATTEMPT: COMPARE THE ARRAYS (WITH NEW ID NUMBER)
-  function attempt(cluesId) {
-    //const cluesId = this.id
+  function attempt() {
+    const cluesId = this.id
     //compare the master code with the last four given code breaker items
     contin = true
     const currCode = breakerCode.slice(breakerCode.length-codeLength)
@@ -148,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkWin(redNum)
   }
 
-  //PIN: ADDS RED AND/OR WHITE PINS TO CLUES
+  //PIN: ADDS RED/WHITE/BLACK PINS TO CLUES
   function pin(cluesId, colour, redNum = 0, whiteNum = 0) {
     const clues = document.querySelectorAll(`.clues[data-key="${cluesId}"]`)
     clues.forEach((clue,ind) => {
@@ -161,11 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-
+  const codeBalls = document.querySelectorAll('.master')
   //CHECK WIN CONDITION && LOSE CONDITION
   function checkWin (redNum) {
-
-    const codeBalls = document.querySelectorAll('.master')
+    //const codeBalls = document.querySelectorAll('.master')
     let outcome = ''
     //Reveal the code to the Player
     if ((redNum === codeBalls.length) || (breakerCode.length === (attempts*codeLength))) {
@@ -184,26 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  //Tell the user if they've won or lost by adding text under correct code
-  function outcomeText(outcome) {
-    if(outcome === 'win'){
-      codemasterSays.textContent = 'You have won. Play again, if you dare.'
-    } else {
-      codemasterSays.textContent = 'You have lost. Redeem yourself and play again.'
-    }
-  }
-
-
-  function startGame() {
-    createGrid()
-    createCode()
-    createOptions(optionBalls)
-    vanish()
-
-  }
-  startGame()
-
-
   function allowAttempt() {
 
     if (breakerCode.length===(rowId + 2) * codeLength){//%codeLength === 0){
@@ -214,70 +195,15 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(attemptButton)
       attemptButton.classList.remove('semi-visible')
     }
-
-
-  }
-    //if (breakerCode.length === codeLength * (cluesId+1))
-  const attemptButton = document.querySelector('[id="0"]')
-
-  console.log(attemptButton)
-
-  //function highlightButton() {
-attemptButton.classList.add('highlight')
-    //}
-
-    //CHECK IF THE NUMBER OF COLOURS IS VALID (MULTIPLE OF FOUR?)
-    // function attemptValidity() {
-    //   if (breakerCode.length%4 !== 0) {
-    //     alert('Select more colours.')
-    //   }
-    //if number of balls is less than four OR if it is not a multiple of four, then
-
-
-
-    // breakerCode.length === codeLength
-    // rowId = 1 <-- use this to find grab the button with this id: #${i}
-    // or multiple of master code length
-    // (breakerCode.length%codeLength === 0)
-    // in which case rowId = breakerCode.length / codeLength
-
-
-
-  //** play conditions (also highlight conditions) **
-  //CALL THIS INSTEAD OF ATTEMPT() IN THE EVENT LISTENER ON ATTEMPT BUTTON
-  function maybePlayBe() {
-    const cluesId = this.id //THROW THIS TO ATTEMPT LATER
-    console.log(this.id)
-    if (breakerCode.length%codeLength === 0) {
-      this.classList.add('invisible') //maybe change this to semi-visible
-      attempt(cluesId)
-    }else {
-      alert('o fuck no')
-    }
   }
 
-  //OR
-
-
-
-
-  function reset() {
-    console.log('RESET BUTTON CLICKED')
-    masterCode = []
-    breakerCode = []
-    codemasterSays.textContent = ''
-    rowId = -1
-    startGame()
-    contin = true
-  }
 
   //OUTCOME WIN-LOSE MODAL POP UP
   const outcomeModal = document.querySelector('.outcome')
   const outcomeSpanX = document.querySelector('.close-outcome')
+  const playAgain = document.querySelector('.play-again')
 
-  outcomeModal.style.display = 'block'
-
-  //escape
+  //ESCAPE MODAL AND RESET
   outcomeSpanX.addEventListener('click', () => {
     outcomeModal.style.display = 'none'
   })
@@ -287,6 +213,54 @@ attemptButton.classList.add('highlight')
       outcomeModal.style.display = 'none'
     }
   })
+
+
+  playAgain.addEventListener('click', () => {
+    outcomeModal.style.display = 'none'
+    reset()
+
+  })
+
+  //OUTCOME NOTIFICATION
+  //Tell player if they've won or lost by adding text under correct code
+  function outcomeText(outcome) {
+    //call the outcome modal pop up
+    outcomeModal.style.display = 'block'
+    const codemasterSays = document.querySelector('.says')
+    if(outcome === 'win'){
+      codemasterSays.textContent = 'You have won. Play again, if you dare.'
+    } else {
+      codemasterSays.textContent = 'You have lost. Redeem yourself and play again.'
+    }
+  }
+
+
+
+  function startGame() {
+    vanish()
+    createGrid()
+    createCode()
+    createOptions(optionBalls)
+
+  }
+  //startGame()
+  function hideCode(codeBalls) {
+    codeBalls.forEach(ball => ball.classList.add('invisible'))
+  }
+
+
+  function reset() {
+    console.log('RESET BUTTON CLICKED')
+    masterCode = []
+    breakerCode = []
+    //codemasterSays.textContent = ''
+    rowId = -1
+    startGame()
+    contin = true
+    hideCode(codeBalls)
+  }
+
+
 
 
   //INSTRUCTIONS MODAL POP UP
