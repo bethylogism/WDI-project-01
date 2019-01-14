@@ -1,7 +1,7 @@
 $darkborder: 3px double black;
 $shadow: 0 0 50px 0 rgba(0, 0, 0, 0.6);
-$rainbow: linear-gradient(0.35turn, red, orange, green, blue, violet);
-$rainbow-light: linear-gradient(0.45turn, red, orange, green, blue, violet);
+$rainbow: linear-gradient(0.35turn, crimson, orange, green, blue, violet);
+$rainbow-light: linear-gradient(0.40turn, crimson, orange, green, blue, violet);
 
 * {
   box-sizing: border-box;
@@ -15,11 +15,13 @@ $rainbow-light: linear-gradient(0.45turn, red, orange, green, blue, violet);
   // text-transform: uppercase;
 }
 
+
+
 h1, h2, h3 {
   color: black;
   text-align: center;
   @media screen and (max-width: 700px) {
-    margin: 10px;
+    margin: 5px;
     //font-size: 2.5rem;
   }
 }
@@ -31,7 +33,7 @@ p {
 main, .welcome {
   max-width: 380px;
   border-radius: 10px;
-  margin: 0 auto;
+  margin: 30px auto;
   // border: $darkborder;
   box-shadow: $shadow;
   padding: 20px;
@@ -41,37 +43,33 @@ main, .welcome {
       //width: 90vw;
       margin: 0 auto;
       box-shadow: none;
-      padding: none;
+      padding: 0;
   }
   @media screen and (max-width: 500px) {
       max-width: none;
       //width: 100vw;
       margin: auto;
       box-shadow: none;
-      padding: none;
+      padding: 0;
   }
 }
-WELCOME SCREEN BACKGROUND
-// .behind {
-//   img {
-//
-//   }
-// }
+
+
 .behind {
   display: block;
   position: fixed;
-  z-index: 1;
+  z-index: -1;
   left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
+  //width: 100%;
+
   //overflow: auto;
   //background-color: rgb(0,0,0);
   //background-color: rgba(0,0,0,0.4);
   background-image: url('../assets/mastermind-01.jpg');
-  background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-size: 40%;
+
 }
 
 .board {
@@ -157,8 +155,8 @@ section {
       background-size: 25%;
     }
     @media screen and (max-width: 500px) {
-      height: 50px;
-      background-size: 35%;
+      height: 30px;
+      background-size: 20%;
     }
       & .master {
       // opacity: 0.9;
@@ -224,6 +222,7 @@ section {
 .reset, .play, .start {
   width: 50%;
   margin: 10px;
+  border-radius: 5px;
   background-image: $rainbow;
   color: white;
   border: none;
@@ -251,7 +250,7 @@ section {
   pointer-events: none;
 }
 .semi-visible {
-  opacity: 0.5;
+  opacity: 0.4;
   transition: all 0.6s;
   pointer-events: none;
 }
@@ -295,13 +294,14 @@ section {
       }
       figure {
         width: 30%;
-
+        text-align: center;
+        justify-content: center;
         @media screen and (max-width: 500px) {
-          max-width: inherit;
+          width: 90%;
         }
       }
       .test-clues {
-        margin: 10px 0;
+        margin: 10px auto;
         border: 1px solid black;
         height: 15px;
         width: 15px;

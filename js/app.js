@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //Grab as an array not a nodeList:
   const masterBalls = Array.prototype.slice.call(document.querySelectorAll('.master'))
   //const colours = ['blue', 'red', 'orange', 'purple', 'pink', 'yellow']
-  const colours = ['red', 'yellow', 'green', 'blue', 'violet', 'black']
+  const colours = ['crimson', 'yellow', 'green', 'blue', 'cyan', 'violet']
   let masterCode = []
   let breakerCode = []
   const attempts = 10
@@ -66,19 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   //CREATE COLOURED OPTION BALLS
-  function createOptions(optionBalls) {
-    optionBalls.forEach((ball, i) => {
+  function createOptions(balls) {
+    balls.forEach((ball, i) => {
       ball.style.backgroundColor = colours[i]
     })
   }
 
 
   //CREATE THE SECRET MASTER CODE COLOURS
-  function colourCode(masterBalls) {
-    masterBalls.forEach((ball, i) => {
-      ball.style.backgroundColor = masterCode[i]
-    })
-  }
+  // function colourCode(masterBalls) {
+  //   masterBalls.forEach((ball, i) => {
+  //     ball.style.backgroundColor = masterCode[i]
+  //   })
+  // }
 
   //CREATE NEW RANDOM MASTER CODE <== put this in init() && reset()
   function createCode() {
@@ -87,14 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
     //    masterCode.push(colours[Math.floor(Math.random() * colours.length)])
     //masterBalls.forEach( () => masterCode.push(colours[Math.floor(Math.random() * colours.length)]))
     masterCode = masterBalls.map(() => colours[Math.floor(Math.random() * colours.length)])
-    colourCode(masterBalls)
+    createOptions(masterBalls)
     return masterCode
   }
 
 
   //PLAYER SELECT COLOURS && ADDS THEM TO BALLS
   function ballSelect(e) {
-    if (contin === true) {
+    if (contin) {
       const breakerBalls = document.querySelectorAll('.breaker')
       breakerCode.push(e.target.style.backgroundColor)
       breakerBalls.forEach((ball, i) => {
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let whiteNum = 0
     currCode.forEach((e1,ind1) => {
       masterCode.forEach((e2,ind2) => {
-      //
+      //Add white pin if element is identical, index is not identical, and used array does not include either index.
         if (e1 === e2 && ind1 !== ind2 && !usedBreaker.includes(ind1) && !usedMaster.includes(ind2)) {
           whiteNum ++
           //add element indices to used arrays
@@ -169,19 +169,21 @@ document.addEventListener('DOMContentLoaded', () => {
     //const codeBalls = document.querySelectorAll('.master')
     let outcome = ''
     //Reveal the code to the Player
-    if ((redNum === codeBalls.length) || (breakerCode.length === (attempts*codeLength))) {
+    if (
+      redNum === codeBalls.length ||
+      breakerCode.length === attempts * codeLength
+    ) {
       codeBalls.forEach(ball => ball.classList.remove('invisible'))
     }
     //WIN: Player code balls are identical to master code balls
     if (redNum === codeBalls.length) {
       outcome = 'win'
-      outcomeText(outcome)
     }
     //LOSE: Reach the end and the last balls in the array not the master balls
     if (breakerCode.length === (attempts*codeLength) && (redNum !== codeBalls.length)) {
       outcome = 'lose'
-      outcomeText(outcome)
     }
+    outcomeText(outcome)
   }
 
 

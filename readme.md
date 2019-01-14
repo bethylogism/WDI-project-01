@@ -15,56 +15,92 @@
 1. Clone or download the repo
 1. Open the `index.html` in your browser of choice
 
-## My Game - Deep Sea Dive
+## My Game - Mastermind
 
 ![Deep Sea Dive](https://user-images.githubusercontent.com/40343797/45214662-fc243200-b292-11e8-9c52-5a1053aa8c0a.png)
 
-You can find a hosted version here ----> [jamesr101.github.io/project-01](https://jamesr101.github.io/project-01)
+You can find a hosted version here ----> [laceswingybethler.github.io/WDI-project-01/](https://laceswingybethler.github.io/WDI-project-01/)
 
 ### Game overview
-Deep Sea Dive is a one person game inspired by the French conservationist and filmmaker Jacques Cousteau. The aim is to capture as many specimen of sea life and return to the surface before the air supply runs out.
+Mastermind is a single player codebreaking game. The aim is to figure out a sequence of colours in a certain combination within a number of attempts.
 
-The player controls the movement of a submarine in order to capture the fish and avoid underwater mines.
+The achieve this, the player is given clues as to how correct their guesses are along the way.
 
+The game is mobile and tablet-friendly and can be played on any device.
 
-### Controls
-- Submarine movements: ← ↑ → ↓ keys
-- Start game: "Start" button or pressing "D"
-- End game: "End Game" button or pressing "S"
-- Toggle mute: Speaker Icon or pressing "Q"
+### Gameplay
+- The player selects coloured balls from the options at the bottom
+- When the player submits these, they will receive feedback according to the following rules:
+* A red pin: each red pin indicates that a coloured ball is correct; the position is right and so is the colour.
+* A white pin: one of the selected colours is within the code, but not in the correct position in the sequence.
+* A black pin: one of the selected colours is not in the code at all.
+
+The player has won if all four of the clues turn red.
 
 ### Game Instructions
-1. The game begins with a welcome modal introducing the aim of the game. The game is started by clicking on the "Start" button or by pressing "D".
+1. The game begins with a welcome modal introducing the aim of the game. The game is started by clicking on the "Start" button.
 
 ![screenshot - Start Modal](https://user-images.githubusercontent.com/40343797/45220826-6777ff00-b2a7-11e8-8511-8a5f00bc0b74.png)
 
-2. Once the game begins, there is short animation of a boat entering onto the screen and the player's submarine appears below the boat. Once the submarine appears, it can be controlled by the player using the ← ↑ → ↓ keys.
+2. The user chooses colours from the animated balls quivering to be selected at the bottom of the board.
 
 ![screenshot - Beginning position](https://user-images.githubusercontent.com/40343797/45220870-8ececc00-b2a7-11e8-804a-c271278a428f.png)
 
-3. Points are gained when the submarine is moved into a fish or other marine life. This 'captures' the specimen and points are gained. The fishes are randomly spawned and each type of fish has different movement patterns. Different types of fish are spawned at different levels and at different probabilities. Generally the fish with higher score values are only spawned at the lower depths and spawned less frequently.
+3. Once the player charset selected four (no more, no less) then they can click attempt and get their feedback.
 
 ![screenshot - Fish types](https://user-images.githubusercontent.com/40343797/45220971-e53c0a80-b2a7-11e8-9942-714db52793d9.png)
 
-4. If the submarine moves into an underwater mine, the mine will explode. This deducts an amount from your remaining Air Supply.
+4. The computer generates the clues depending on the position and colour of the chosen code. If the secret code is 'orange, green, pink, yellow' and the user selects 'orange' in the first slot, the computer will generate a red pin to indicate that this is correct in both colour and position. If the user selects 'yellow' as their second slot, the computer will generate a white pin to indicate that 'yellow' is in the secret code, but in a different position, and if the user selects 'black' as their third colour, the computer will generate a black pin to indicate that it's not in the secret code at all.
 
 ![screenshot - Mines](https://user-images.githubusercontent.com/40343797/45220908-b4f46c00-b2a7-11e8-9460-2a4dee40d0ae.png)
 
-5. Your Air Supply is shown in the air tank on the left of the screen. You must return to the surface before the Air Supply runs out. If you do not return to the surface before your Air Supply runs out, the game will end and your points will be lost. A beeping sound and flashing Air Supply will warn you when your Air Supply is running low.
+5. If you win, you'll get not only all red pins but also a 'win screen' pop up, baiting the player to try again.
 
 ![screenshot - End Modal Successful](https://user-images.githubusercontent.com/40343797/45221008-04d33300-b2a8-11e8-999e-62b50286c8ec.png)
 
+6. Equivalently, if the player reaches the end of the board without guessing the correct code then they lose, and see a lose screen that allows them to reset and try again.
+
 ## Process
 
-The starting point for this game was creating the basic grid layout on which the submarine could move. This was created by a list of 'div's in the HTML. Each cell within the grid was an individual element. These cells are nestled within a container. The submarine, and fish were created by applying classes to the elements within the grid. When the submarine or fish is moved, their class is removed from the cell of their current position and applied to the new cell.
+First, I created the player and master boards in some rudimentary HTML. This was two sections with four div slots for the hidden 'master' code and four slots for the player's guesses, as well as a button and a space for clues.
 
-I created fish as objects which contain their points value, an array of their movement patterns, their age and the class which is being applied to the cell that they are in. The class relates to a css class with a corresponding background image of the fish type. When a fish is created it is added to an array of fish in play.
+! [screenshot - Simple HTMl ](https://user-images.githubusercontent.com/44749113/51035208-1fdce900-15a1-11e9-812a-643c6726647f.png)
 
-While the game is running, a function runs through the array of fish in play and moves each fish the corresponding amount within their movement patterns.
+I then created the options that could be selected. These colours were generated in javascript using a simple array of colours in a string (e.g. ['red', 'yellow', 'pink'..]). The computer uses this array to randomly select four colours for the secret code.
 
-A function was also created which checks if a fish has been caught. This runs through the array of fish in play to check if its location is the same as that of the submarine. If it has been caught, it is removed from the array of fish in play and its corresponding points value to added to the player's score.
+Because this 'colours' array is used to create the game logic, this makes it harder to break the game - if someone updates the 'colours' array, then the colours loaded into the 'options' changes, and the colours that the computer randomly selects to create the secret code are also updated simultaneously.
 
-Once I had this mechanics working, I worked on adding a timer countdown which displayed as an air supply within the player's air tank. The height of the air supply element is a proportion of the amount of time left.
+Once the computer as generated a random sequence of colours, the user needs to create their own array. To do this I added event listeners onto the colour options. When the player clicks on a colour, the background colour of the users empty slots is updated, and the selected colour is pushed onto a new player array.
+
+The core game logic requires the comparison of these two arrays: the master secret code and the player's breaker code. I knew at some point that the player's code would extend to fit the board, so I took a slice of the last n elements in this array. 'n' would be determined by the difficulty level of the game. This is typically four - and I have started with four accordingly - but a longer sequence is much more difficult and an option that I wanted to build in later. To future-proof the game against extending the code length beyond four, I took a slice of the last n elements in the array where 'n' is the length of the secret master code.
+
+To compare the two array, I created a forEach() method inside a forEach() method. I wanted it to execute a callback function on each and every element in each array. The callback compares each element and its index. If the elements are identical _and_ their indexes are identical then it increases the count of red pins to be displayed in a different function. Crucially, the indexes of identical pins needed to then be recognised as 'used up' to prevent them from being counted a second time when the forEach() method ran over the other array. To do this I pushed the indexes that were 'spent' in this sense to a 'used' array.
+
+Much more difficult is counting the number of white pins. White pins are given when the colour is in the secret code, but it's _not_ in the same index in the player's array as it is in the secret code array. This meant increasing the number of white pins to display if and only if the element was the same element and the index was not the same index. Alone this still counts the pins which are perfect matches, though, as they're still in the array and the indexes being compared constantly changes. If the first and third elements in the secret code are red then if the player guesses red as the first element in their array, we want the mechanic to take into account the fact that both first elements are red and not to compare the third red element with the player's first red element. To counteract this, the 'used' arrays were crucial as we can simply require that not only are the elements the same and the indexes not, but also that the used arrays do not include either of the indexes.
+
+By then adding both of the element indices to the 'used' arrays after this second round of comparisons, this prevents elements that have already been 'counted' from being compared again. In a simple comparison of two arrays, the number of times the computer compares elements is the square of the length of the arrays. Without continuously updating and excluding elements in the 'used' arrays, the computer compares each and every element not once for each element but - in this case - four more times as it goes through the second array.
+
+Excluding the 'used' colours created one white clue for each matching colour, instead of four white clue for each match.
+
+```js
+//Add white pin if element is identical, index is not identical, and used array does not include either index.
+if (
+  e1 === e2 &&
+  ind1 !== ind2 &&
+  !usedBreaker.includes(ind1) &&
+  !usedMaster.includes(ind2)
+) {
+  whiteNum ++
+  //add element indices to used arrays
+  usedBreaker.push(ind1)
+  usedMaster.push(ind2)
+  console.log(`nr of white pins: ${whiteNum}`)
+}
+```
+
+Once I had this counting mechanic working, it was a case of creating a function to generate the red, white and remaining black pins accordingly.
+
+I expanded the simple player board HTML in JavaScript. This allowed me to repeat the HTML a specific number of times using a variable that I could again update depending on how difficult I, or anyone else using this code, might want the game to be. I included custom data id numbers in the repeating HTML (${i}) which increased upon each iteration of the grid generation.
 
 I then moved onto the task of allowing the position of the submarine to control the scrolling of the grid. This also required stoping the default behaviour of controls to prevent the user from scrolling through the grid to a position where the submarine was not visible.
 
