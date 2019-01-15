@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //              ** REMOVE WELCOME SCREEN **
 
+  //playBtn.addEventListener('click', () => console.log('hallo?')) //play)
   startBtn.addEventListener('click', startGame)
   function vanish() {
     welcomeScreen.classList.add('vanish')
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  //CREATE COLOURED OPTION BALLS <== Can we refactor this into the below fx?
+  //CREATE COLOURED OPTION BALLS
   function createOptions(balls) {
     balls.forEach((ball, i) => {
       ball.style.backgroundColor = colours[i]
@@ -73,16 +74,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   //CREATE THE SECRET MASTER CODE COLOURS
-  function colourCode(masterBalls) {
-    masterBalls.forEach((ball, i) => {
-      ball.style.backgroundColor = masterCode[i]
-    })
-  }
+  // function colourCode(masterBalls) {
+  //   masterBalls.forEach((ball, i) => {
+  //     ball.style.backgroundColor = masterCode[i]
+  //   })
+  // }
 
-  //CREATE NEW RANDOM MASTER CODE <== part of startGame() and reset()
+  //CREATE NEW RANDOM MASTER CODE <== put this in init() && reset()
   function createCode() {
+    //masterCode = Array()
+    //while (masterCode.length < masterBalls.length)
+    //    masterCode.push(colours[Math.floor(Math.random() * colours.length)])
+    //masterBalls.forEach( () => masterCode.push(colours[Math.floor(Math.random() * colours.length)]))
     masterCode = masterBalls.map(() => colours[Math.floor(Math.random() * colours.length)])
-    colourCode(masterBalls)
+    createOptions(masterBalls)
     return masterCode
   }
 
@@ -164,21 +169,21 @@ document.addEventListener('DOMContentLoaded', () => {
     //const codeBalls = document.querySelectorAll('.master')
     let outcome = ''
     //Reveal the code to the Player
-    if (redNum === codeBalls.length ||
-    breakerCode.length === attempts * codeLength) {
+    if (
+      redNum === codeBalls.length ||
+      breakerCode.length === attempts * codeLength
+    ) {
       codeBalls.forEach(ball => ball.classList.remove('invisible'))
     }
     //WIN: Player code balls are identical to master code balls
     if (redNum === codeBalls.length) {
       outcome = 'win'
-      outcomeText(outcome)
     }
     //LOSE: Reach the end and the last balls in the array not the master balls
-    if (breakerCode.length === attempts*codeLength &&
-    redNum !== codeBalls.length) {
+    if (breakerCode.length === (attempts*codeLength) && (redNum !== codeBalls.length)) {
       outcome = 'lose'
-      outcomeText(outcome)
     }
+    outcomeText(outcome)
   }
 
 
