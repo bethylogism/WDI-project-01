@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  //              ** REMOVE WELCOME SCREEN **
+  //              ** START: REMOVE WELCOME SCREEN **
 
   startBtn.addEventListener('click', startGame)
   function vanish() {
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //              ** FUNCTIONS **
 
-  //CREATE THE GRID FOR THE USER CODE BREAKING ATTEMPTS && COMPUTER RESPONSES
+  //CREATE THE GRID FOR PLAYER'S CODE BREAKING ATTEMPTS && COMPUTER RESPONSES
   function createGrid () {
     const grid = document.querySelector('.grid')
 
@@ -96,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // colour ball with the defined colours
         ball.style.backgroundColor = breakerCode[i]
       })
-      console.log(breakerCode)
       allowAttempt()
       return breakerCode
     }
@@ -184,12 +183,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function allowAttempt() {
 
-    if (breakerCode.length===(rowId + 2) * codeLength){//%codeLength === 0){
+    if (breakerCode.length===(rowId + 2) * codeLength){
       rowId ++
       contin = false
       const attemptButton = document.querySelector(`[id="${rowId}"]`)
-      console.log('row id is ' + rowId)
-      console.log(attemptButton)
+
       attemptButton.classList.remove('semi-visible')
     }
   }
@@ -285,5 +283,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   //add an event listener on breakerBalls -  click allows you to change THIS.color
+  //add a button that allows you to POP the last ones. A delete button, or an evenet listener on the ball itself.
+  //The pop function needs to work only when:
+  //if (breakerCode.length<==(rowId + 2) * codeLength) &&
+  //(breakerCode.lenth >== (rowId+1) * codeLength)
 
 })
