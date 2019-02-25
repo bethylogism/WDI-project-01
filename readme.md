@@ -83,14 +83,14 @@ Excluding the 'used' colours creates one white clue for each matching colour.
 //Add white pin if element is identical, index is not identical, and used array does not include either index.
 if (
   colour1 === colour2 &&
-  ind1 !== ind2 &&
-  !usedBreaker.includes(ind1) &&
-  !usedMaster.includes(ind2)
+  index1 !== index2 &&
+  !usedBreaker.includes(index1) &&
+  !usedMaster.includes(index2)
 ) {
   whiteNum ++
   //add element indices to used arrays
-  usedBreaker.push(ind1)
-  usedMaster.push(ind2)
+  usedBreaker.push(index1)
+  usedMaster.push(index2)
   console.log(`nr of white pins: ${whiteNum}`)
 }
 ```
@@ -98,8 +98,6 @@ if (
 Once I had this counting mechanic working, it was a case of creating a function to generate the red, white and remaining black pins accordingly.
 
 I expanded the simple player board HTML in JavaScript. This allowed me to repeat the HTML a specific number of times using a variable that I could again update depending on how difficult I, or anyone else using this code, might want the game to be. I included custom data id numbers in the repeating HTML (${i}) which increased upon each iteration of the grid generation.
-
-I then moved onto the task of allowing the position of the submarine to control the scrolling of the grid. This also required stopping the default behaviour of controls to prevent the user from scrolling through the grid to a position where the submarine was not visible.
 
 During the game, a function decide whether to allow the player's next attempt based on the length of the player's 'breaker code'. Only once it is the correct multiple of the secret code length (determined by the id of the row) will the attempt button become visible, and the ability to continue adding balls into the next row is suspended until the attempt button is pressed. This guides the player through the correct gameplay.
 
