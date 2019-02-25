@@ -17,7 +17,7 @@
 
 ## My Game - Mastermind
 
-![Mastermind](https://user-images.githubusercontent.com/44749113/53339528-86725800-38fe-11e9-9210-58cfb69b2c81.png)
+![Mastermind](https://user-images.githubusercontent.com/44749113/53372462-cf4ffe00-394a-11e9-9800-e2c5315aef50.png)
 
 You can find a hosted version here ----> [laceswingybethler.github.io/WDI-project-01/](https://laceswingybethler.github.io/WDI-project-01/)
 
